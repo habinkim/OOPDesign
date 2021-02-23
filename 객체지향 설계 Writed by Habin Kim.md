@@ -165,8 +165,50 @@ public class TicketOffice {
 
 }
 ```
+판매원은 매표소에서 초대장을 티켓으로 교호나해 주거나 티켓을 판매하는 역할을 수행한다. 
+판매원을 구현한 `TicketSeller` 클래스는 자신이 일하는 매표소를 알고 있어야 한다.
 
+``` java
+public class TicketSeller {
 
+    private TicketOffice ticketOffice;
+    
+    public TicketSeller(TicketOffice ticketOffice) {
+        this.ticketOffice = ticketOffice;
+    }
+
+    public TicketOffice getTicketOffice() {
+        return ticketOffice;
+    }
+
+}
+```
+
+소극장을 구현하는 클래스는 Theater
+
+``` java
+public class Theater {
+
+    private TicketSeller ticketSeller;
+
+    public Theater(TicketSeller ticketSeller) {
+        this.ticketSeller = ticketSeller;
+    }
+
+    public void enter(Audience audience) {
+        if (audience.getBag().hasInvitation()) {
+            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
+            audience.getBag().setTicket(ticket);1
+        } else {
+            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
+            audience.getBag().minusAmount(ticket.getFee());
+            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
+            audience.getBag().setTicket(ticket);
+        }
+    }
+    
+}
+```
 
 ## 02. 객체지향 프로그래밍
 
