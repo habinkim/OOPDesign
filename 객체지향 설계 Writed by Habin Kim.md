@@ -438,7 +438,7 @@ public class TicketSeller {
 
 }
 ```
-
+  
 
 
 ## 02. 객체지향 프로그래밍
