@@ -1,0 +1,53 @@
+@startuml
+
+Bag <|-- Audience: bag
+Invitation <|-- Bag: invitation
+Ticket <|-- Bag: ticket
+Ticket <|-- TicketOffice: tickets
+TicketOffice <|-- TicketSeller: ticketOffice
+TicketSeller <|-- Theater: ticketSeller
+
+class Theater implements Audience
+class TicketSeller implements Ticket, Audience, Bag
+
+class Audience {
+    + getBag()
+}
+
+class Bag {
+    - amount
+    + hasInvitaion()
+    + hasTicket()
+    + setTikcet(ticket)
+    + minusAmount(amount)
+    + plusAmount(amount)
+}
+
+class Invitation {
+    - when
+}
+class Ticket {
+    - fee
+    + getFee()
+}
+
+class TicketSeller {
+    + sellTo(audience)
+}
+
+class TicketOffice {
+    - amount
+    + getTikcet()
+    + minusAmount(amount)
+    + plusAmount(amount)
+}
+
+class Audience {
+    + getBag()
+}
+
+class Theater {
+    + enter(audience)
+}
+
+@enduml
